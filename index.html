@@ -18,7 +18,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
-    overflow: hidden;
+    
     background-position: 15%;
 }
 .data{
@@ -40,12 +40,13 @@ body{
  }
  .result{
     background-color: rgba(0, 0, 0, 0.331);
+    padding: 0;
  }
     </style>
 </head>
 <body>
 <div class="container mt-3 p-5 text-center w-100 heading ">
-    <h1>Weather App</h1>
+    <h1>Weather App  </h1>
 </div>
 
 <div class="container mt-5 p-5 w-75 text-center  data">
@@ -56,6 +57,8 @@ body{
 <div class="container result w-75" id="result"></div>
 </body>
 <script>
+  
+
  function cityData() {
     citysearch = city.value
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${citysearch}&appid=b41ec3be35c7dac8aabbc21ba253137a`)
@@ -72,13 +75,14 @@ temp=((cityData.main.temp)-273.15).toFixed()
 tempMin=((cityData.main.temp_min)-273.15).toFixed()
 tempMax=((cityData.main.temp_max)-273.15).toFixed()
 feels_like=((cityData.main.feels_like)-273.15).toFixed()
-
+hum=cityData.main.humidity
+wind=cityData.wind.speed
 
 result.innerHTML=`
-<h3 class="city text-center text-white"><span><i class="fa-solid fa-location-dot"></i> </span> ${cityName}</h3> 
-<div class="d-flex justify-content-between text-white">
+<h3 class=" text-center text-white p-2"><span><i class="fa-solid fa-location-dot"></i></span> ${cityName}</h3> 
+<div class=" d-flex justify-content-between   text-white p-3">
     <div>
-        <span class="temp text-white" style="font-size:70px;">${temp}° </span> <br>
+        <span class="temp text-white " style="font-size:70px;">${temp}°   </span> <br>
         <small class="weather text-white ">${weather}</small>
     </div>
     <div>
@@ -88,9 +92,12 @@ result.innerHTML=`
     </div>
 </div >
 
+<p class="text-center text-white p-2">${hum} <span><i class="fa-sharp fa-solid fa-droplet"></i></i></span>${wind} <span><i class="fa-solid fa-wind"></i></span> </p>
+
 
 `
 
 }
 </script>
+
 </html>
